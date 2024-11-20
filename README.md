@@ -1,13 +1,13 @@
-# 📦 Streamlit App Starter Kit 
-```
-⬆️ (Replace above with your app's name)
-```
+# ☁️🌡️🌀 Boo Weather App
+
+This is a weather app
+
 
 Description of the app ...
 
 ## Demo App
 
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://app-starter-kit.streamlit.app/)
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://boo-weather.streamlit.app/)
 
 ## GitHub Codespaces
 
