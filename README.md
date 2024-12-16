@@ -1,6 +1,6 @@
-# ☁️🌡️🌀 Boo Weather App
+# ☁️🌡️🌀 Weather Alarm System
 
-This is a weather app
+This app predicts weather forecast with accurate information!
 
 
 Description of the app ...
