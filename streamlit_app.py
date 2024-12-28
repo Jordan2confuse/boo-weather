@@ -1,5 +1,5 @@
 import streamlit as st
 
-st.title(' 🌀🌡️☁️ Boo Weather App')
+st.title(' 🌀🌡️☁️ Weather Alert System')
 
-st.info('YOU SNOOZE YOU LOSE!')
+st.info('Get your latest weather updates!')
