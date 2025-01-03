@@ -1,5 +1,5 @@
 import streamlit as st
-import pandas as st
+import pandas as pd
 
 st.title(' 🌀🌡️☁️ Weather Alert System')
 
