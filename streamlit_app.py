@@ -2,7 +2,7 @@ import streamlit as st
 import subprocess
 
 # Run R script using subprocess
-subprocess.run(["Rscript", "app.R"])
+subprocess.run(["Rscript", "Weather_FYP.R"])
 
 st.title(' 🌀🌡️☁️ Weather Alert System')
 
