@@ -1,11 +1,43 @@
+pip install streamlit
+install.packages("reticulate")
 import streamlit as st
-import pandas as pd
+import subprocess
+
+# Run R script using subprocess
+subprocess.run(["Rscript", "app.R"])
 
 st.title(' 🌀🌡️☁️ Weather Alert System')
 
 st.info('Get your latest weather updates!')
 
-with st.expander('Data'):
-    st.write('**Raw data**')    
-    df = pd.read_csv('https://raw.githubusercontent.com/Jordan2confuse/boo-weather/refs/heads/master/weather_prediction_dataset.csv')
-    df
+library(streamlit)
+library(randomForest)
+
+# Load the saved model
+rf_model <- readRDS("random_forest_model.rds")
+
+# Streamlit UI
+st$title("Weather Prediction using Random Forest")
+
+# Input fields (replace with actual feature names)
+feature1 <- st$number_input("Feature 1")
+feature2 <- st$number_input("Feature 2")
+feature3 <- st$number_input("Feature 3")
+feature4 <- st$number_input("Feature 4")
+
+# Predict button
+if (st$button("Predict")) {
+  input_data <- data.frame(Feature1 = feature1,
+                           Feature2 = feature2,
+                           Feature3 = feature3,
+                           Feature4 = feature4)
+  
+  prediction <- predict(rf_model, input_data)
+  
+  st$subheader("Prediction:")
+  st$write(as.character(prediction))
+}
+
+
+
+
