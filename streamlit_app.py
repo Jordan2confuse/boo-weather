@@ -15,7 +15,7 @@ library(randomForest)
 rf_model <- readRDS("random_forest_model.rds")
 
 # Streamlit UI
-st$title("Weather Prediction using Random Forest")
+st$title("Weather Alert System")
 
 # Input fields (replace with actual feature names)
 feature1 <- st$number_input("Feature 1")
