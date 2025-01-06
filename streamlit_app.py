@@ -1,5 +1,3 @@
-pip install streamlit
-install.packages("reticulate")
 import streamlit as st
 import subprocess
 
