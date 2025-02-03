@@ -1,38 +1,62 @@
 import streamlit as st
-import pandas as pd
-import numpy as np
 import json
-from sklearn.ensemble import RandomForestClassifier
+import pandas as pd
 
-# Load model JSON
-with open("random_forest_model.json", "r") as f:
-    model_components = json.load(f)
+def main():
+    st.title("WeatherWise Alerts")
+    st.write("Upload a JSON, Pickle, or Notebook model file")
 
-# Retrieve important details (e.g., number of trees, mtry, etc.)
-ntree = model_components["ntree"]
-mtry = model_components["mtry"]
-# Use the model formula or import a trained RandomForest model.
+    model_file = st.file_uploader("Upload your file", type=["json", "pkl", "ipynb"])
 
-# Dummy function for predictions (replace with actual Random Forest usage)
-def predict_weather(data):
-    # Simulate a prediction (use your trained model here)
-    return np.random.choice(["Rain", "Sunny", "Cloudy"], p=[0.3, 0.4, 0.3])
+    model = None  # Placeholder for the loaded model
+    if model_file:
+        try:
+            if model_file.name.endswith('.json'):
+                # Load JSON model
+                model_data = json.load(model_file)
+                st.success("JSON file uploaded successfully!")
+                st.json(model_data)
+                st.write("Model successfully loaded from JSON file!")
+            
+            elif model_file.name.endswith('.pkl'):
+                # Load Pickle model
+                import pickle
+                model = pickle.load(model_file)
+                st.success("Pickle file uploaded successfully!")
+                st.write(f"Model Type: {type(model)}")
+                st.write(f"Model Details: {model}")
+            
+            elif model_file.name.endswith('.ipynb'):
+                # Load and display notebook content
+                model_data = model_file.read().decode("utf-8")
+                st.success("Notebook file uploaded successfully!")
+                st.write("Contents of the notebook:")
+                st.text(model_data[:1000])  # Display first 1000 characters for simplicity
+            
+            else:
+                st.error("Unsupported file format!")
 
-st.title("Weather Forecast Prediction")
+            # Add an option to process the model if applicable
+            if model:
+                st.write("You can now use this model to make predictions.")
+                uploaded_data = st.file_uploader("Upload input data for prediction (CSV)", type=["csv"])
+                
+                if uploaded_data:
+                    # Load the input data
+                    input_data = pd.read_csv(uploaded_data)
+                    st.write("Input Data:")
+                    st.write(input_data)
 
-# Input fields
-temperature = st.number_input("Enter the Temperature:", min_value=-50, max_value=50, value=20)
-humidity = st.number_input("Enter the Humidity (%):", min_value=0, max_value=100, value=50)
-wind_speed = st.number_input("Enter the Wind Speed (km/h):", min_value=0, max_value=200, value=10)
+                    # Placeholder for prediction (update based on your model's logic)
+                    if hasattr(model, "predict"):
+                        predictions = model.predict(input_data)
+                        st.write("Predictions:")
+                        st.write(predictions)
+                    else:
+                        st.warning("The uploaded model does not support prediction.")
+        
+        except Exception as e:
+            st.error(f"An error occurred while processing the file: {e}")
 
-# Prediction Button
-if st.button("Predict Weather"):
-    input_data = pd.DataFrame({
-        "Temperature": [temperature],
-        "Humidity": [humidity],
-        "Wind Speed": [wind_speed]
-    })
-    
-    # Call prediction function
-    prediction = predict_weather(input_data)
-    st.write(f"Predicted Weather: {prediction}")
+if __name__ == "_main_":
+    main()
