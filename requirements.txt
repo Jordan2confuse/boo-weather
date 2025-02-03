@@ -1,7 +1,4 @@
 streamlit
+json
 pandas
-numpy
-scikit-learn
-streamlit run app.py
-
 
